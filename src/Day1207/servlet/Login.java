@@ -4,10 +4,7 @@ import Day1207.dao.UserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.net.URLEncoder;
 
@@ -25,9 +22,12 @@ public class Login extends HttpServlet {
         UserDao user = new UserDao();
         boolean flag = user.hasUser(name, password);
         if (flag) {
-            Cookie cookie = new Cookie("username", URLEncoder.encode(name, "utf-8"));
+            /*Cookie cookie = new Cookie("username", URLEncoder.encode(name, "utf-8"));
             cookie.setMaxAge(60 * 60);
-            response.addCookie(cookie);
+            response.addCookie(cookie);*/
+            HttpSession session = request.getSession();
+            session.setAttribute("username", name);
+            session.setMaxInactiveInterval(60 * 2);
             response.sendRedirect(request.getContextPath() + "/index");
         } else {
             request.getRequestDispatcher("/fail").forward(request, response);

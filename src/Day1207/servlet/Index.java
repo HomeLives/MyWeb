@@ -2,10 +2,7 @@ package Day1207.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
@@ -22,23 +19,35 @@ public class Index extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();
-        Cookie[] cookies = request.getCookies();
+        /*Cookie[] cookies = request.getCookies();
         String username = null;
         boolean flag = false;
-        for (Cookie cookie : cookies) {
-            if ("username".equals(cookie.getName())) {
-                username = URLDecoder.decode(cookie.getValue(), "utf-8");
-                flag = true;
-                break;
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                if ("username".equals(cookie.getName())) {
+                    username = URLDecoder.decode(cookie.getValue(), "utf-8");
+                    flag = true;
+                    break;
+                }
             }
-        }
-        if (flag) {
+        }*/
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        /*System.out.println(username);*/
+        if (username != null) {
             writer.print("欢迎用户：" + username);
             writer.flush();
             writer.close();
         } else {
             response.sendRedirect(request.getContextPath() + "/index.jsp");
         }
+        /*if (flag) {
+            writer.print("欢迎用户：" + username);
+            writer.flush();
+            writer.close();
+        } else {
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+        }*/
     }
 
     @Override
