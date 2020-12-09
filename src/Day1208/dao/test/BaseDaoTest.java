@@ -1,5 +1,6 @@
-package Day1208.dao;
+package Day1208.dao.test;
 
+import Day1208.dao.BaseDao;
 import Day1208.domain.User;
 import org.junit.Assert;
 import org.junit.Test;

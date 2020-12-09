@@ -1,5 +1,7 @@
-package Day1208.dao;
+package Day1208.dao.impl;
 
+import Day1208.dao.BaseDao;
+import Day1208.dao.EmpDao;
 import Day1208.domain.Emp;
 
 import java.util.List;
