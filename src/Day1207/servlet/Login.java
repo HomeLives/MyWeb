@@ -4,10 +4,12 @@ import Day1207.dao.UserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  * @Author Frank
@@ -23,8 +25,9 @@ public class Login extends HttpServlet {
         UserDao user = new UserDao();
         boolean flag = user.hasUser(name, password);
         if (flag) {
-            request.setAttribute("name", name);
-            request.getRequestDispatcher("/Success").forward(request, response);
+            Cookie cookie = new Cookie("username", URLEncoder.encode(name, "utf-8"));
+            response.addCookie(cookie);
+            response.sendRedirect(request.getContextPath() + "/Success");
         } else {
             request.getRequestDispatcher("/Fail").forward(request, response);
         }
