@@ -66,7 +66,6 @@ public class BaseDao {
             while (resultSet.next()) {
                 T t = root.newInstance();
                 Field[] temps = root.getDeclaredFields();
-                /*System.out.println(temps.length);*/
                 for (int i = 0; i < temps.length; i++) {
                     temps[i].setAccessible(true);
                     String type = temps[i].getType().getName();
@@ -75,17 +74,21 @@ public class BaseDao {
                         temps[i].set(t, resultSet.getInt(i + 1));
                     } else if ("java.lang.String".equals(type)) {
                         temps[i].set(t, resultSet.getString(i + 1));
+                    } else if ("double".equals(type) || "java.lang.Double".equals(type)) {
+                        temps[i].set(t, resultSet.getDouble(i + 1));
+                    } else if ("java.util.Date".equals(type)) {
+                        temps[i].set(t, resultSet.getDate(i + 1));
+                    } else if ("float".equals(type) || "java.lang.Float".equals(type)) {
+                        temps[i].set(t, resultSet.getDate(i + 1));
                     }
                 }
                 list.add(t);
             }
-        } catch (SQLException | InstantiationException | IllegalAccessException throwables) {
-            throwables.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             JDBCUtil.close(resultSet, statement, connection);
         }
         return list;
     }
-
-
 }

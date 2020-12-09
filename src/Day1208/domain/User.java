@@ -7,24 +7,24 @@ import java.util.Date;
  * @Date: 2020/12/8 18:14
  */
 public class User {
-    private int id;
+    private Integer id;
     private String name;
     private String passwprd;
 
     public User() {
     }
 
-    public User(int id, String name, String passwprd) {
+    public User(Integer id, String name, String passwprd) {
         this.id = id;
         this.name = name;
         this.passwprd = passwprd;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
