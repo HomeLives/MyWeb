@@ -15,7 +15,7 @@ import java.net.URLEncoder;
  * @Author Frank
  * @Date: 2020/12/7 0007 上午 10:51
  */
-@WebServlet("/Login")
+@WebServlet("/login")
 public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,10 +26,11 @@ public class Login extends HttpServlet {
         boolean flag = user.hasUser(name, password);
         if (flag) {
             Cookie cookie = new Cookie("username", URLEncoder.encode(name, "utf-8"));
+            cookie.setMaxAge(60 * 60);
             response.addCookie(cookie);
-            response.sendRedirect(request.getContextPath() + "/Success");
+            response.sendRedirect(request.getContextPath() + "/index");
         } else {
-            request.getRequestDispatcher("/Fail").forward(request, response);
+            request.getRequestDispatcher("/fail").forward(request, response);
         }
     }
 

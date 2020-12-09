@@ -11,7 +11,7 @@
     <title>登录</title>
 </head>
 <body>
-<form method="post" action="<%=request.getContextPath()%>/Login">
+<form method="post" action="<%=request.getContextPath()%>/login">
     <input type="text" placeholder="请输入密码" name="name"><br>
     <input type="password" placeholder="请输入密码" name="password"><br>
     <input type="submit" value="登录">

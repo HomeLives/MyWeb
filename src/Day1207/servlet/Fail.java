@@ -12,7 +12,7 @@ import java.io.PrintWriter;
  * @Author Frank
  * @Date: 2020/12/7 0007 上午 10:56
  */
-@WebServlet("/Fail")
+@WebServlet("/fail")
 public class Fail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
